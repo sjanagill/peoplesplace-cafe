@@ -1,6 +1,6 @@
 # Peoples Place Cafe App
 
-This is the Peoples Place Cafe API. It provides the backend REST APIs for the users to add/remove product types, products, users and update cart. 
+This is the Peoples Place Cafe API. It provides the backend REST APIs for the users to add/remove product types, products, users and update cart. It is a Spring Boot application which using NoSQL MongoDB Atlas instance. 
 
 ## Requirements
 
