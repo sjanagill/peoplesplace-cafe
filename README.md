@@ -14,7 +14,7 @@ This is the Peoples Place Cafe API. It provides the backend REST APIs for the us
 * [SonarQube](https://www.sonarqube.org/)
 
 ## Swagger-UI
-http://ec2-35-177-63-156.eu-west-2.compute.amazonaws.com:7575/swagger-ui.html
+http://ec2-18-169-2-189.eu-west-2.compute.amazonaws.com:7575/swagger-ui.html
 
 ![image](https://user-images.githubusercontent.com/40201060/136126566-85601325-5b34-4dff-9c43-bf9e870f7b5a.png)
 
@@ -23,7 +23,7 @@ http://ec2-35-177-63-156.eu-west-2.compute.amazonaws.com:7575/swagger-ui.html
 ![image](https://user-images.githubusercontent.com/40201060/136184929-c0f29fb5-28ad-4584-88f5-b686e7f3d7a8.png)
 
 ## EC2 Instance
-http://ec2-35-177-63-156.eu-west-2.compute.amazonaws.com:7575/product/
+http://ec2-18-169-2-189.eu-west-2.compute.amazonaws.com:7575/product/
 
 ![image](https://user-images.githubusercontent.com/40201060/136126690-5906e7ed-6cb7-4435-b12a-b7b54ed04853.png)
 
