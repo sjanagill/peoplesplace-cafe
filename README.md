@@ -13,10 +13,13 @@ This is the Peoples Place Cafe API. It provides the backend REST APIs for the us
 * [Amazon EC2](https://aws.amazon.com/ec2/)
 * [SonarQube](https://www.sonarqube.org/)
 
-## Swagger-UI
+## Open API Specification
 http://ec2-18-169-2-189.eu-west-2.compute.amazonaws.com:7575/swagger-ui.html
 
 ![image](https://user-images.githubusercontent.com/40201060/136126566-85601325-5b34-4dff-9c43-bf9e870f7b5a.png)
+
+## Postman Collection
+https://www.getpostman.com/collections/1c929838c08d21f7c267
 
 ## Basic Architecture
 
