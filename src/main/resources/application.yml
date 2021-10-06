@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: peoplesplace-cafe
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:pa55word@cluster0.3nexw.mongodb.net/peoplesplace-demo?retryWrites=true&w=majority
+  profiles:
+    active: local
+server:
+  port : 7575
