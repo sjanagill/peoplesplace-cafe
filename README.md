@@ -16,14 +16,24 @@ This is the Peoples Place Cafe API
 ## Swagger-UI
 http://ec2-35-177-63-156.eu-west-2.compute.amazonaws.com:7575/swagger-ui.html
 
+![image](https://user-images.githubusercontent.com/40201060/136126566-85601325-5b34-4dff-9c43-bf9e870f7b5a.png)
+
+
 ## EC2 Instance
 http://ec2-35-177-63-156.eu-west-2.compute.amazonaws.com:7575/product/
+
+![image](https://user-images.githubusercontent.com/40201060/136126690-5906e7ed-6cb7-4435-b12a-b7b54ed04853.png)
+
 
 ## MongoDB Graphs
 https://charts.mongodb.com/charts-project-0-jfmyt/public/dashboards/10e78fd9-f8d0-4d8b-a0d5-f7bed339a9d0
 
+![image](https://user-images.githubusercontent.com/40201060/136126854-54226b62-9dad-4804-9e89-0a9e631bfe5d.png)
+
+
 ## SonarQube Instance
 http://localhost:9000/projects?sort=name
+
 
 ## GitHub
 https://github.com/sjanagill/peoplesplace-cafe
