@@ -10,7 +10,7 @@ This is the Peoples Place Cafe API. It provides the backend REST APIs for the us
 * [MongoDB Atlas](https://cloud.mongodb.com/)
 * [jUnit](https://junit.org/)
 * [Docker](https://www.docker.com/)
-* [Amamzon EC2](https://aws.amazon.com/ec2/)
+* [Amazon EC2](https://aws.amazon.com/ec2/)
 * [SonarQube](https://www.sonarqube.org/)
 
 ## Swagger-UI
