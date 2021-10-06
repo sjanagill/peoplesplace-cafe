@@ -1,6 +1,6 @@
 # Peoples Place Cafe App
 
-This is the Peoples Place Cafe API
+This is the Peoples Place Cafe API. It provides the backend REST APIs for the users to add/remove product types, products, users and update cart. 
 
 ## Requirements
 
@@ -66,11 +66,3 @@ docker run -f "Dockerfile" -it -p7575:7575 pp-cafe:latest
 ```bash
 ./deploy.sh
 ```
-
-## Helpful Links
-* [API Documentation](https://portal.tools.stg.b2cecom.eu.pvh.cloud/B2CEU/documentation/ecom-openapi-spec)
-* [Kong Enterprise Documentation](https://docs.konghq.com/enterprise/)
-* [Transformers Confluence Page](https://confluence-eu.pvh.com/display/PEP/PVH+Ecom+API)
-* [AWS SSO Login](https://pvh-europe.awsapps.com/start)
-* [PVH ECOMM API Spec](https://confluence-eu.pvh.com/display/PEP/PVH+Ecom+API%3ASPEC)
-* [Dyntrace](https://mjx66619.live.dynatrace.com/)
