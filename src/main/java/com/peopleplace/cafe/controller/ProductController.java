@@ -28,23 +28,22 @@ public class ProductController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/")
+    @GetMapping(path = "/")
     public ResponseEntity<List<ProductDto>> getProducts() {
         List<ProductDto> body = productService.listProducts();
-        return new ResponseEntity<List<ProductDto>>(body, HttpStatus.OK);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/add")
     @PostMapping("/add")
     public ResponseEntity<ApiResponse> addProduct(@RequestBody ProductDto productDto, @RequestHeader("token") String token) {
         authenticationService.authenticate(token);
         Optional<Category> optionalCategory = categoryService.readCategory(productDto.getCategoryId());
         if (!optionalCategory.isPresent()) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "category is invalid"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new ApiResponse(false, "category is invalid"), HttpStatus.CONFLICT);
         }
         Category category = optionalCategory.get();
-        productService.addProduct(productDto, category);
-        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Product has been added"), HttpStatus.CREATED);
+        productService.addProduct(productDto, category, token);
+        return new ResponseEntity<>(new ApiResponse(true, "Product has been added"), HttpStatus.CREATED);
     }
 
     @PostMapping("/update/{productID}")
@@ -52,11 +51,11 @@ public class ProductController {
         authenticationService.authenticate(token);
         Optional<Category> optionalCategory = categoryService.readCategory(productDto.getCategoryId());
         if (!optionalCategory.isPresent()) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "category is invalid"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new ApiResponse(false, "category is invalid"), HttpStatus.CONFLICT);
         }
         Category category = optionalCategory.get();
         productService.updateProduct(productID, productDto, category);
-        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Product has been updated"), HttpStatus.OK);
+        return new ResponseEntity<>(new ApiResponse(true, "Product has been updated"), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

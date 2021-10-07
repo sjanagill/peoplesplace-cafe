@@ -59,7 +59,7 @@ public class UserService {
             encryptedPassword = hashPassword(signupDto.getPassword());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            logger.error("hashing password failed {}", e.getMessage());
+            throw new CustomException(MessageStrings.HASH_FAILURE + e.getMessage());
         }
 
 
@@ -82,7 +82,6 @@ public class UserService {
     }
 
     /**
-     *
      * @param signInDto
      * @return
      * @throws CustomException
@@ -101,8 +100,7 @@ public class UserService {
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            logger.error("hashing password failed {}", e.getMessage());
-            throw new CustomException(e.getMessage());
+            throw new CustomException(MessageStrings.HASH_FAILURE + e.getMessage());
         }
 
         AuthenticationToken token = authenticationService.getToken(user);
@@ -116,7 +114,6 @@ public class UserService {
     }
 
     /**
-     *
      * @param password
      * @return
      * @throws NoSuchAlgorithmException
@@ -125,13 +122,11 @@ public class UserService {
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.update(password.getBytes());
         byte[] digest = md.digest();
-        String myHash = DatatypeConverter
+        return DatatypeConverter
                 .printHexBinary(digest).toUpperCase();
-        return myHash;
     }
 
     /**
-     *
      * @param token
      * @param userCreateDto
      * @return
@@ -140,7 +135,7 @@ public class UserService {
      */
     public ResponseDto createUser(String token, UserCreateDto userCreateDto) throws CustomException, AuthenticationFailException {
         User creatingUser = authenticationService.getUser(token);
-        if (!canCrudUser(creatingUser.getRole())) {
+        if (!Helper.canCrudUser(creatingUser.getRole())) {
             // user can't create new user
             throw new AuthenticationFailException(MessageStrings.USER_NOT_PERMITTED);
         }
@@ -149,7 +144,7 @@ public class UserService {
             encryptedPassword = hashPassword(userCreateDto.getPassword());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            logger.error("hashing password failed {}", e.getMessage());
+            throw new CustomException(MessageStrings.HASH_FAILURE + e.getMessage());
         }
 
         User user = new User(userCreateDto.getFirstName(), userCreateDto.getLastName(), userCreateDto.getEmail(), userCreateDto.getRole(), encryptedPassword);
@@ -168,7 +163,6 @@ public class UserService {
     }
 
     /**
-     *
      * @param token
      * @param userUpdateDto
      * @return
@@ -178,7 +172,7 @@ public class UserService {
     public ResponseDto updateUser(String token, UserUpdateDto userUpdateDto) throws CustomException, AuthenticationFailException {
         User updatingUser = authenticationService.getUser(token);
         User user;
-        if (!canCrudUser(updatingUser.getRole())) {
+        if (!Helper.canCrudUser(updatingUser.getRole())) {
             // user can't create new user
             throw new AuthenticationFailException(MessageStrings.USER_NOT_PERMITTED);
         }
@@ -188,7 +182,7 @@ public class UserService {
                 encryptedPassword = hashPassword(userUpdateDto.getPassword());
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
-                logger.error("hashing password failed {}", e.getMessage());
+                throw new CustomException(MessageStrings.HASH_FAILURE + e.getMessage());
             }
             user = new User(userUpdateDto.getFirstName(), userUpdateDto.getLastName(), userUpdateDto.getRole(), encryptedPassword);
         } else {
@@ -205,28 +199,5 @@ public class UserService {
             throw new CustomException(e.getMessage());
         }
 
-    }
-
-    /**
-     * @param role
-     * @return
-     */
-    boolean canCrudUser(Role role) {
-        return role.equals(Role.admin) || role.equals(Role.manager);
-    }
-
-    /**
-     * @param userUpdating
-     * @param userIdBeingUpdated
-     * @return
-     */
-    boolean canCrudUser(User userUpdating, Long userIdBeingUpdated) {
-        Role role = userUpdating.getRole();
-        // admin and manager can crud any user
-        if (role.equals(Role.admin) || role.equals(Role.manager)) {
-            return true;
-        }
-        // user can update his own record, but not his role
-        return role.equals(Role.user) && userUpdating.getId().equals(userIdBeingUpdated);
     }
 }

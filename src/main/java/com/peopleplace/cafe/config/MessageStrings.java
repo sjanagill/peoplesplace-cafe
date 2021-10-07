@@ -9,4 +9,5 @@ public class MessageStrings {
     public static final String USER_UPDATED = "user updated successfully";
     public static final String ID_NOT_PRESENT = "primary key is required for updating";
     public static final String WRONG_P = "please check the pass";
+    public static final String HASH_FAILURE = "hashing password failed {}";
 }

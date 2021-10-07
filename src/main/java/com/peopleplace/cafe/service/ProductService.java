@@ -1,10 +1,14 @@
 package com.peopleplace.cafe.service;
 
+import com.peopleplace.cafe.config.MessageStrings;
 import com.peopleplace.cafe.dto.ProductDto;
+import com.peopleplace.cafe.exceptions.AuthenticationFailException;
 import com.peopleplace.cafe.exceptions.ProductNotExistException;
 import com.peopleplace.cafe.model.Category;
 import com.peopleplace.cafe.model.Product;
+import com.peopleplace.cafe.model.User;
 import com.peopleplace.cafe.repository.ProductRepository;
+import com.peopleplace.cafe.utils.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +22,8 @@ public class ProductService {
     SequenceGeneratorService sequenceGeneratorService;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    AuthenticationService authenticationService;
 
     public static ProductDto getDtoFromProduct(Product product) {
         ProductDto productDto = new ProductDto(product);
@@ -39,7 +45,12 @@ public class ProductService {
         return productDtos;
     }
 
-    public void addProduct(ProductDto productDto, Category category) {
+    public void addProduct(ProductDto productDto, Category category, String token) {
+        User creatingUser = authenticationService.getUser(token);
+        if (!Helper.canCrudUser(creatingUser.getRole())) {
+            // user can't create new user
+            throw new AuthenticationFailException(MessageStrings.USER_NOT_PERMITTED);
+        }
         Product product = getProductFromDto(productDto, category);
         product.setId(sequenceGeneratorService.generateSequence(Product.SEQUENCE_NAME));
         productRepository.save(product);
@@ -51,13 +62,11 @@ public class ProductService {
         productRepository.save(product);
     }
 
-
     public Product getProductById(Long productId) throws ProductNotExistException {
         Optional<Product> optionalProduct = productRepository.findById(productId);
         if (!optionalProduct.isPresent())
             throw new ProductNotExistException("Product id is invalid " + productId);
         return optionalProduct.get();
     }
-
 
 }
