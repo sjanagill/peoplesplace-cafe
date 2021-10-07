@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: peoplesplace-cafe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: peoplesplace-cafe
+  template:
+    metadata:
+      labels:
+        app: peoplesplace-cafe
+    spec:
+      containers:
+        - name: app
+          image: peoplesplace-cafe-java:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGO_URL
+              value: mongodb://localhost:27017/peoplesplace-demo
+          imagePullPolicy: Always
